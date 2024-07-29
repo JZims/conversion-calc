@@ -1,25 +1,45 @@
-use clap::Parser;
+use clap::{command, Arg, Parser, Command};
 
 
-#[derive(Parser)]
-struct Cli {
-    /// Either Volume or Weight.
-    conversion_input: String, 
-    /// Modifier used for material.
-    gravity_mod: f32
+// #[derive(Parser)]
+// struct Cli {
+//     /// Either Volume or Weight.
+//     conversion_input: String, 
+//     /// Modifier used for material.
+//     gravity_mod: f32
+// }
+
+
+// Without using built-in Parser
+fn main() {
+    let match_result = command!()
+        .arg(
+            Arg::new("conversion_type")
+        )
+        .arg(
+            Arg::new("number_of_units")
+            
+        )
+        .arg(
+            Arg::new("gravity_modifer")
+        );
+
+
 }
 
-fn main () {
-    let args = Cli::parse();
 
-    if args.conversion_input.to_lowercase() == "volume" {
-        println!("You chose Volume! Your incoming value should be in mL and will be converted to g.")
-    }
-    if args.conversion_input.to_lowercase() == "weight" {
-        println!("You chose weight! Your incoming value should be in g and will be converted to mL.")
-    }
 
-}
+// fn main () {
+//     let args = Cli::parse();
+
+//     if args.conversion_input.to_lowercase() == "volume" {
+//         println!("You chose Volume! Your incoming value should be in mL and will be converted to g.")
+//     }
+//     if args.conversion_input.to_lowercase() == "weight" {
+//         println!("You chose weight! Your incoming value should be in g and will be converted to mL.")
+//     }
+
+// }
 
 
 
