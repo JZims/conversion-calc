@@ -1,6 +1,52 @@
 use clap::{command, Arg, Parser, Command};
 
 
+
+// Without using built-in Parser
+fn main() {
+    let conversion = command!()
+        .subcommand(
+            Command::new("gravity-mod")
+            .arg(
+                Arg::new("gravity_modifer")
+                .short('g')
+                .long("gravity-mod")
+                .alias("grav")
+                .required(true)
+                .value_parser(clap::value_parser!(f16))
+                .help("Provide the gravity modifier (Specifig Gravity or Density) as a decimal here.")
+            )
+        )
+        .subcommand(
+            Command::new("conversion-type")
+            .arg(
+            Arg::new("conversion_type")
+                .short('t')
+                .long("type")
+                .alias("type")
+                .required(true)
+                .help("What is the incomming value to be converted measured in? ('weight' or 'volume')")
+                .value_parser(["weight", "volume", "Weight", "Volume", "g", "ml"])
+
+             )
+        )
+        .subcommand(
+            Command::new("unit-quantity")
+            .arg(
+            Arg::new("unit_quantity")
+                .short('u')
+                .long("units")
+                .alias("units")
+                .required(true)
+                .help("How many units are being converted into the opposite measurement?")
+
+             )
+        );
+
+}
+
+// Using Parser
+
 // #[derive(Parser)]
 // struct Cli {
 //     /// Either Volume or Weight.
@@ -8,26 +54,6 @@ use clap::{command, Arg, Parser, Command};
 //     /// Modifier used for material.
 //     gravity_mod: f32
 // }
-
-
-// Without using built-in Parser
-fn main() {
-    let match_result = command!()
-        .arg(
-            Arg::new("conversion_type")
-        )
-        .arg(
-            Arg::new("number_of_units")
-            
-        )
-        .arg(
-            Arg::new("gravity_modifer")
-        );
-
-
-}
-
-
 
 // fn main () {
 //     let args = Cli::parse();
