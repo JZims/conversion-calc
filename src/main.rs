@@ -1,4 +1,4 @@
-use clap::{command, Arg, Parser, Command};
+use clap::{command, Arg};
 
 
 
@@ -34,7 +34,7 @@ fn main() {
                 .global(true)
                 .value_parser(clap::value_parser!(f32))
 
-             )
+             ).about("A lightweight CLI conversion tool for quickly converting volume and weight units using density and specific gravity measurements.")
             .get_matches();
 
     let modifier = conversion.get_one::<f32>("gravity_modifier").unwrap();
@@ -57,6 +57,7 @@ fn main() {
    
 
 }
+
 
 // Using built-in Parser
 
