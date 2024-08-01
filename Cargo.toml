@@ -2,6 +2,14 @@
 name = "conversion-calc"
 version = "0.1.0"
 edition = "2021"
+authors = ["Josh Zimmerman <jzimmscodes@outlook.com>"]
+license = "MIT OR Apache-2.0"
+description = "A tool calculate the Weight or Volume of the opposite UoM using density or specific gravity.  "
+readme = "README.md"
+homepage = "https://github.com/JZims/conversion-calcs"
+repository = "https://github.com/JZims/conversion-calc"
+keywords = ["cli", "weight", "volume", "density"]
+categories = ["command-line-utilities"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
