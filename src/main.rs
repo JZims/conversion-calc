@@ -1,5 +1,7 @@
-use clap::{command, Arg};
+mod density_to_sg;
 
+use clap::{command, Arg};
+use crate::density_to_sg::density_to_specific_gravity;
 
 
 // Without using built-in Parser
@@ -11,7 +13,7 @@ fn main() {
                 .long("gravity-mod")
                 .alias("grav")
                 .value_parser(clap::value_parser!(f32))
-                .help("Provide the gravity modifier (Specifig Gravity or Density) as a decimal here.")
+                .help("Provide the gravity modifier (Specific Gravity or Density) as a decimal here.")
                 .global(true)
             )
             .arg(
@@ -41,6 +43,7 @@ fn main() {
     let c_type = conversion.get_one::<String>("conversion_type").unwrap();
     let quantity = conversion.get_one::<f32>("unit_quantity").unwrap();
 
+
     if c_type == "weight" {
 
         let value:f32 = quantity / modifier;
@@ -50,36 +53,19 @@ fn main() {
     } else if c_type == "volume" {
 
          let value:f32 = quantity * modifier;
+         let sg:f32 = density_to_specific_gravity(value);
 
-        println!("The converted volume of {}ml to weight(g) is: {}g", quantity, value )
+        println!("The converted volume of {}ml to weight(g) is: {}g", quantity, value );
+        println!("The specific gravity of the converted volume is: {}", sg);
+
     }
+
+
     
    
 
 }
 
-
-// Using built-in Parser
-
-// #[derive(Parser)]
-// struct Cli {
-//     /// Either Volume or Weight.
-//     conversion_input: String, 
-//     /// Modifier used for material.
-//     gravity_mod: f32
-// }
-
-// fn main () {
-//     let args = Cli::parse();
-
-//     if args.conversion_input.to_lowercase() == "volume" {
-//         println!("You chose Volume! Your incoming value should be in mL and will be converted to g.")
-//     }
-//     if args.conversion_input.to_lowercase() == "weight" {
-//         println!("You chose weight! Your incoming value should be in g and will be converted to mL.")
-//     }
-
-// }
-
+// Create a followup question to ask the user if they would like to convert Density to Specific Gravity or vice versa
 
 
